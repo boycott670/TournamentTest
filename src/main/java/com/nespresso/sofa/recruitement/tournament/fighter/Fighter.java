@@ -6,12 +6,13 @@ import java.util.Collection;
 import com.nespresso.sofa.recruitement.tournament.EquipmentFactory;
 import com.nespresso.sofa.recruitement.tournament.equipment.Armor;
 import com.nespresso.sofa.recruitement.tournament.equipment.Equipment;
+import com.nespresso.sofa.recruitement.tournament.weapon.OneHandAxe;
 import com.nespresso.sofa.recruitement.tournament.weapon.Weapon;
 
 public abstract class Fighter<F extends Fighter<F>>
 {
   private int hp;
-  private final Weapon weapon;
+  private Weapon weapon;
   private final Collection<Equipment> equipments;
 
   Fighter(final int hp, final Weapon weapon)
@@ -23,7 +24,13 @@ public abstract class Fighter<F extends Fighter<F>>
 
   public final F equip(final String equipment)
   {
-    equipments.add(EquipmentFactory.getEquipment(equipment));
+    if ("axe".equals(equipment))
+    {
+      weapon.wrap(new OneHandAxe());
+    } else
+    {
+      equipments.add(EquipmentFactory.getEquipment(equipment));
+    }
 
     @SuppressWarnings("unchecked")
     final F subFighter = (F) this;
@@ -31,7 +38,7 @@ public abstract class Fighter<F extends Fighter<F>>
     return subFighter;
   }
 
-  private final int damage()
+  int damage()
   {
     int damage = weapon.damage();
 
