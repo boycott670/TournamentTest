@@ -26,7 +26,7 @@ public abstract class Fighter<F extends Fighter<F>>
   {
     if ("axe".equals(equipment))
     {
-      weapon.wrap(new OneHandAxe());
+      weapon = new OneHandAxe();
     } else
     {
       equipments.add(EquipmentFactory.getEquipment(equipment));
