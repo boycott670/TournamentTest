@@ -5,7 +5,9 @@ import java.util.Collection;
 
 import com.nespresso.sofa.recruitement.tournament.equipment.Equipment;
 import com.nespresso.sofa.recruitement.tournament.parsers.DefaultEquipmentsParser;
+import com.nespresso.sofa.recruitement.tournament.parsers.DefaultWeaponsParser;
 import com.nespresso.sofa.recruitement.tournament.parsers.EquipmentsParser;
+import com.nespresso.sofa.recruitement.tournament.parsers.WeaponsParser;
 import com.nespresso.sofa.recruitement.tournament.strategies.DefaultEngagementStrategy;
 import com.nespresso.sofa.recruitement.tournament.strategies.EngagementStrategy;
 import com.nespresso.sofa.recruitement.tournament.weapon.Weapon;
@@ -16,8 +18,10 @@ public abstract class Fighter<F extends Fighter<F>>
   
   private final EquipmentsParser equipmentsParser;
   
+  private final WeaponsParser weaponsParser;
+  
   private int hp;
-  private final Weapon weapon;
+  private Weapon weapon;
   
   private final Collection<Equipment> equipments;
   
@@ -26,6 +30,8 @@ public abstract class Fighter<F extends Fighter<F>>
     engagementStrategy = new DefaultEngagementStrategy();
     
     equipmentsParser = new DefaultEquipmentsParser();
+    
+    weaponsParser = new DefaultWeaponsParser();
     
     this.hp = hp;
     this.weapon = weapon;
@@ -55,7 +61,14 @@ public abstract class Fighter<F extends Fighter<F>>
 
   public F equip(final String equipment)
   {
-    equipments.add(equipmentsParser.parseEquipment(equipment));
+    if (weaponsParser.isWeapon(equipment))
+    {
+      weapon = weapon.switchTo(weaponsParser.parseWeapon(equipment));
+    }
+    else
+    {
+      equipments.add(equipmentsParser.parseEquipment(equipment));
+    }
 
     @SuppressWarnings("unchecked")
     final F effetiveThis = (F)this;
@@ -69,5 +82,10 @@ public abstract class Fighter<F extends Fighter<F>>
     engagementStrategy.setSecondFighter(opponent);
     
     engagementStrategy.engage();
+  }
+  
+  public void takenDamage()
+  {
+    
   }
 }

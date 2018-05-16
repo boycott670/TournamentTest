@@ -15,4 +15,10 @@ public final class Swordsman extends Fighter<Swordsman>
   {
     super(HP, DEFAULT_WEAPON.get());
   }
+  
+  public Swordsman(final String vicious)
+  {
+    this();
+    getWeapon().poison();
+  }
 }

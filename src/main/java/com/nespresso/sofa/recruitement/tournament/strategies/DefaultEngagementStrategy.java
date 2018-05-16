@@ -61,6 +61,7 @@ public final class DefaultEngagementStrategy implements EngagementStrategy
   private void attack(final Fighter<?> attacker, final Fighter<?> defender)
   {
     defender.setHitPoints(Math.max(0, defender.hitPoints() - reduceDamage(reduceAttackerDamage(attacker.getWeapon().getDamage(), attacker), attacker.getWeapon().getClass(), defender)));
+    defender.takenDamage();
   }
   
   @Override

@@ -52,4 +52,21 @@ public class TournamentTest
     assertThat(highlander.hitPoints()).isEqualTo(10);
 
   }
+
+  @Test
+  public void ViciousSwordsmanVsVeteranHighlander()
+  {
+
+    Swordsman swordsman = new Swordsman("Vicious").equip("axe")
+        .equip("buckler")
+        .equip("armor");
+
+    Highlander highlander = new Highlander("Veteran");
+
+    swordsman.engage(highlander);
+
+    assertThat(swordsman.hitPoints()).isEqualTo(1);
+    assertThat(highlander.hitPoints()).isEqualTo(0);
+
+  }
 }
