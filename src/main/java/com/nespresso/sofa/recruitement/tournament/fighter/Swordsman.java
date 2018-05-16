@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import com.nespresso.sofa.recruitement.tournament.weapon.Sword;
 import com.nespresso.sofa.recruitement.tournament.weapon.Weapon;
 
-public final class Swordsman extends Fighter
+public final class Swordsman extends Fighter<Swordsman>
 {
   private static final int HP = 100;
   

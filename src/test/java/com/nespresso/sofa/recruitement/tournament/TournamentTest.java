@@ -10,15 +10,30 @@ import com.nespresso.sofa.recruitement.tournament.fighter.Viking;
 public class TournamentTest
 {
   @Test
-  public void SwordsmanVsViking() {
+  public void SwordsmanVsViking()
+  {
 
-      Swordsman swordsman = new Swordsman();
+    Swordsman swordsman = new Swordsman();
 
-      Viking viking = new Viking();
+    Viking viking = new Viking();
 
-      swordsman.engage(viking);
-      assertThat(swordsman.hitPoints()).isEqualTo(0);
-      assertThat(viking.hitPoints()).isEqualTo(35);
+    swordsman.engage(viking);
+    assertThat(swordsman.hitPoints()).isEqualTo(0);
+    assertThat(viking.hitPoints()).isEqualTo(35);
+
+  }
+
+  @Test
+  public void SwordsmanWithBucklerVsVikingWithBuckler()
+  {
+
+    Swordsman swordsman = new Swordsman().equip("buckler");
+
+    Viking viking = new Viking().equip("buckler");
+
+    swordsman.engage(viking);
+    assertThat(swordsman.hitPoints()).isEqualTo(0);
+    assertThat(viking.hitPoints()).isEqualTo(70);
 
   }
 }

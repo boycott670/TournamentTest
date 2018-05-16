@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import com.nespresso.sofa.recruitement.tournament.weapon.Axe;
 import com.nespresso.sofa.recruitement.tournament.weapon.Weapon;
 
-public final class Viking extends Fighter
+public final class Viking extends Fighter<Viking>
 {
   private static final int HP = 120;
   
