@@ -30,4 +30,10 @@ public final class Buckler extends Equipment
     return 0;
   }
 
+  @Override
+  public int reduceOwnDamage(int damage)
+  {
+    return damage;
+  }
+
 }

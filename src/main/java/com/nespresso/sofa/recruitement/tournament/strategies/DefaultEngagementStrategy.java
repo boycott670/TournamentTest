@@ -23,8 +23,28 @@ public final class DefaultEngagementStrategy implements EngagementStrategy
     secondFighter = fighter;
   }
   
+  private int reduceAttackerDamage(int damage, final Fighter<?> attacker)
+  {
+    for (final Equipment equipment : attacker.getEquipments())
+    {
+      damage = equipment.reduceOwnDamage(damage);
+      
+      if (damage <= 0)
+      {
+        return 0;
+      }
+    }
+    
+    return damage;
+  }
+  
   private int reduceDamage(int damage, final Class<? extends Weapon> weaponType, final Fighter<?> defender)
   {
+    if (damage <= 0)
+    {
+      return 0;
+    }
+    
     for (final Equipment equipment : defender.getEquipments())
     {
       damage = equipment.reduceDamage(damage, weaponType);
@@ -40,7 +60,7 @@ public final class DefaultEngagementStrategy implements EngagementStrategy
 
   private void attack(final Fighter<?> attacker, final Fighter<?> defender)
   {
-    defender.setHitPoints(Math.max(0, defender.hitPoints() - reduceDamage(attacker.getWeapon().getDamage(), attacker.getWeapon().getClass(), defender)));
+    defender.setHitPoints(Math.max(0, defender.hitPoints() - reduceDamage(reduceAttackerDamage(attacker.getWeapon().getDamage(), attacker), attacker.getWeapon().getClass(), defender)));
   }
   
   @Override

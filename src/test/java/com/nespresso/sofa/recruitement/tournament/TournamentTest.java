@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
+import com.nespresso.sofa.recruitement.tournament.fighter.Highlander;
 import com.nespresso.sofa.recruitement.tournament.fighter.Swordsman;
 import com.nespresso.sofa.recruitement.tournament.fighter.Viking;
 
@@ -34,6 +35,21 @@ public class TournamentTest
     swordsman.engage(viking);
     assertThat(swordsman.hitPoints()).isEqualTo(0);
     assertThat(viking.hitPoints()).isEqualTo(70);
+
+  }
+
+  @Test
+  public void ArmoredSwordsmanVsViking()
+  {
+    Highlander highlander = new Highlander();
+
+    Swordsman swordsman = new Swordsman().equip("buckler")
+        .equip("armor");
+
+    swordsman.engage(highlander);
+
+    assertThat(swordsman.hitPoints()).isEqualTo(0);
+    assertThat(highlander.hitPoints()).isEqualTo(10);
 
   }
 }
