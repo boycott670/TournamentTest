@@ -27,12 +27,12 @@ public final class GreatSword extends Equipment
   }
 
   @Override
-  public Runnable postEngageHook()
-  {
-    return () ->
-    {
-      damageCounter++;
-    };
-  }
+	public Runnable damageDealtHook()
+	{
+		return () ->
+		{
+			damageCounter++;
+		};
+	}
 
 }

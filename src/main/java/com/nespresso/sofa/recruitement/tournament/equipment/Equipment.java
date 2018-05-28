@@ -4,15 +4,20 @@ import java.util.function.ToIntFunction;
 
 public abstract class Equipment
 {
-  private static final Runnable NOOP_POST_ENGAGE_HOOK = () -> {};
+  private static final Runnable NOOP_HOOK = () -> {};
   
   abstract ToIntFunction<Class<? extends Equipment>> damageIncreaseWhenDealingDamage();
 
   abstract ToIntFunction<Class<? extends Equipment>> damageDecreaseWhenReceivingDamage();
   
-  public Runnable postEngageHook()
+  public Runnable damageReceivedHook()
   {
-    return NOOP_POST_ENGAGE_HOOK;
+    return NOOP_HOOK;
+  }
+  
+  public Runnable damageDealtHook()
+  {
+    return NOOP_HOOK;
   }
   
   public final int damageIncrease(final Class<? extends Equipment> weaponType)

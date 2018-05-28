@@ -72,13 +72,17 @@ public abstract class Fighter<F extends Fighter<F>>
         .mapToInt(equipment -> equipment.damageIncrease(weaponType))
         .sum();
     
+    equipments.stream()
+    	.map(Equipment::damageDealtHook)
+    	.forEach(Runnable::run);
+    
     damage *= damageBoostFactor();
     
     for (final Equipment defensiveEquipment : opponent.equipments)
     {
        damage -= defensiveEquipment.damageDecrease(weaponType);
        
-       defensiveEquipment.postEngageHook().run();
+       defensiveEquipment.damageReceivedHook().run();
        
        if (damage <= 0)
        {

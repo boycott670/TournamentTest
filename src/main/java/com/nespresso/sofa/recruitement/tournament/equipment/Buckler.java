@@ -29,14 +29,14 @@ public final class Buckler extends Equipment
     {
       if (isEffective())
       {
-        if (weaponType == Axe.class)
-        {
-          damageDealtByAxe = true;
-        }
-        
         if (damageCounter % 2 == 0)
         {
-          return Integer.MAX_VALUE;
+	    	if (weaponType == Axe.class)
+	        {
+	          damageDealtByAxe = true;
+	        }
+	    	
+	    	return Integer.MAX_VALUE;
         }
       }
       
@@ -45,7 +45,7 @@ public final class Buckler extends Equipment
   }
 
   @Override
-  public Runnable postEngageHook()
+  public Runnable damageReceivedHook()
   {
     return () ->
     {

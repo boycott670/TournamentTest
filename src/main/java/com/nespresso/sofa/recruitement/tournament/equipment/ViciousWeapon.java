@@ -34,7 +34,7 @@ public final class ViciousWeapon extends Equipment
   }
 
   @Override
-  public Runnable postEngageHook()
+  public Runnable damageReceivedHook()
   {
     return () ->
     {

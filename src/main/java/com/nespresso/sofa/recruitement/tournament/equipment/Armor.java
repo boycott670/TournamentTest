@@ -18,9 +18,9 @@ public final class Armor extends Equipment
   }
 
   @Override
-  public Runnable postEngageHook()
+  public Runnable damageReceivedHook()
   {
-    return super.postEngageHook();
+    return super.damageReceivedHook();
   }
 
 }
